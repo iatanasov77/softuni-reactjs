@@ -102,3 +102,23 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+##############################
+# MY IGNORES: Ivan Atanasov
+##############################
+
+###> Eclipse project files ###
+/.buildpath
+/.project
+/.settings
+###< Eclipse project files ###
+
+###> package managers and webpack ###
+/yarn.lock
+/build/
+###< package managers ###
+
+
+
+
