@@ -17,8 +17,6 @@ const Favorites = () => {
             } );
     }, [] );
     
-    const onDeleteHandler = ( tabId ) => { };
-    
 	return (
         <div className="tablatures-container" style={{marginTop: "110px"}}>
             <div className="card">
@@ -35,7 +33,7 @@ const Favorites = () => {
                         <tbody>
           
 	                        { tablatures.length > 0
-	                        	? tablatures.map( x => <TablatureItem key={x.id} tablature={x} onDeleteHandler={onDeleteHandler} /> )
+	                        	? tablatures.map( x => <TablatureItem key={x.id} tablature={x} /> )
 	                        	: <tr><td colSpan="3">No Tablatures</td></tr>
 	                        }
                         
