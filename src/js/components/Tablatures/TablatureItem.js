@@ -26,7 +26,7 @@ const TablatureItem = ( {tablature} ) => {
                 
                 
                 {/**
-                  * Only on My Tablatures
+                  * Only on Tablatures That The Current User is Owner
                   */}
                   
                 { tablature.createdBy == user.id

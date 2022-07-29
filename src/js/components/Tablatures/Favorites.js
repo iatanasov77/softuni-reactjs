@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import { TablaturesContext } from '../../contexts/TablaturesContext';
+
 import TablatureItem from './TablatureItem.js';
 
 const Favorites = () => {
