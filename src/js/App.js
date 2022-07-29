@@ -1,11 +1,8 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, Suspense, lazy } from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { TablaturesProvider } from './contexts/TablaturesContext';
-
-import * as tablatureService from './services/tablatureService';
-import { TablatureActions } from './components/Tablatures/Constants';
 
 import Navigation from './components/Navigation/Navigation';
 import UserLogout from './components/Navigation/UserLogout';
