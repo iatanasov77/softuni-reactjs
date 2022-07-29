@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
 import { TablaturesContext } from '../../contexts/TablaturesContext';
 
-const SubmitTablature = () => {
+const TablatureCreate = () => {
 
     const { user } = useContext( AuthContext );
     const { addTablatureHandler } = useContext( TablaturesContext );
@@ -136,4 +136,4 @@ const SubmitTablature = () => {
     );
 };
 
-export default SubmitTablature;
+export default TablatureCreate;

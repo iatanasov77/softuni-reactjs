@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import SubmitTablature from './SubmitTablature';
-import UserLogin from './UserLogin';
+import { AuthContext } from '../contexts/AuthContext';
+import TablatureCreate from './Tablatures/TablatureCreate';
+import UserLogin from './Authentication/UserLogin';
 
 const Navigation = () => {
 
@@ -32,7 +32,7 @@ const Navigation = () => {
                     </Link>
                 </li>
                 
-                <SubmitTablature />
+                <TablatureCreate />
                 
                 <li className="nav-item">
                     <Link to="/logout" className="nav-link">

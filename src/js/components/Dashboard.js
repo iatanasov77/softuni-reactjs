@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 
-import { TablaturesContext } from '../../contexts/TablaturesContext';
+import { TablaturesContext } from '../contexts/TablaturesContext';
 
-import TablatureItem from '../Tablatures/TablatureItem.js';
+import TablatureItem from './Tablatures/TablatureItem.js';
 
 const Dashboard = () => {
 	

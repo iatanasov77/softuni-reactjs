@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import * as tablatureService from '../../services/tablatureService';
 import PlayerControls from './PlayerControls';
 
-const TablaturePlayer = () => {
+const Player = () => {
 	let { tabId }	= useParams();
 	
 	const remoteUrl    = tablatureService.serviceUrl();
@@ -100,4 +100,4 @@ const TablaturePlayer = () => {
 	);
 };
 
-export default TablaturePlayer;
+export default Player;

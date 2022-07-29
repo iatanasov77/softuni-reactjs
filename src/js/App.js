@@ -4,23 +4,23 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { TablaturesProvider } from './contexts/TablaturesContext';
 
-import Navigation from './components/Navigation/Navigation';
-import UserLogout from './components/Navigation/UserLogout';
+import Navigation from './components/Navigation';
+import UserLogout from './components/Authentication/UserLogout';
 
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard';
 
 import ButtonIcons from './components/Tablatures/PlayerControls/ButtonIcons';
-import TablaturePlayer from './components/Tablatures/TablaturePlayer';
+import Player from './components/Tablatures/Player';
 
 /*
  READ THIS: https://linguinecode.com/post/code-splitting-react-router-with-react-lazy-and-react-suspense
 
-const UserRegister      = lazy( () => import( './components/Registration/UserRegister' ) );
+const UserRegister      = lazy( () => import( './components/Authentication/UserRegister' ) );
 const MyTablatures      = lazy( () => import( './components/Tablatures/MyTablatures' ) );
 const Favorites         = lazy( () => import( './components/Tablatures/Favorites' ) );
 const TablatureUpdate   = lazy( () => import( './components/Tablatures/TablatureUpdate' ) );
 */
-import UserRegister from './components/Registration/UserRegister';
+import UserRegister from './components/Authentication/UserRegister';
 import MyTablatures from './components/Tablatures/MyTablatures';
 import Favorites from './components/Tablatures/Favorites';
 import TablatureUpdate from './components/Tablatures/TablatureUpdate';
@@ -94,7 +94,7 @@ function App()
         				
         				<Route path="/tablatures/:tabId/play" element={
         					<Suspense fallback={<span>Loading ....</span>} >
-        						<TablaturePlayer />
+        						<Player />
         					</Suspense>
         				} />
         				
