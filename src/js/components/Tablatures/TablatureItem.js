@@ -40,10 +40,7 @@ const TablatureItem = ( {tablature} ) => {
                 
                 { tablature.createdBy == user.id
                     ? (
-                        <Link to={`/tablatures/${tablature.id}/delete`}
-                            className="btn btn-primary ml-4"
-                            onClick={onDelete}
-                        >
+                        <Link className="btn btn-primary ml-4" onClick={onDelete}>
                             Delete
                         </Link>
                       )
