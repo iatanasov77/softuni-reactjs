@@ -40,6 +40,8 @@ function App()
         <AuthProvider>
             <TablaturesProvider>
                 <div className="ApplicationContainer" style={{width: "100%"}}>
+                
+                    {/* Top Bar ( Header ) */}
                     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                         <div className="container-fluid">
                             <div className="sidebar-header">
@@ -65,6 +67,7 @@ function App()
                         <div id="ApplicationAlertsBody" />
                     </div>
                     
+                    {/* Main Content */}
                     <Routes>
         				<Route path="/" element={
         				    <Suspense fallback={<span>Loading ....</span>} >
@@ -105,6 +108,7 @@ function App()
                         } />
         			</Routes>
         			
+        			{/* Footer */}
                     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-bottom copyright-bar">
                         <div className="container-fluid">
                             <div className="site-support">
@@ -115,9 +119,11 @@ function App()
                         </div>
                     </nav>
                     
+                    {/* SVG Icons */}
                     <div>
                         <ButtonIcons />
                     </div>
+                    
                  </div>
              </TablaturesProvider>
          </AuthProvider>
