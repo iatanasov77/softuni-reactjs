@@ -22,8 +22,7 @@ const UserLogin = () => {
         authService.login(
             formData,
             function( response ) {
-                console.log( response );
-                
+                //console.log( response );
                 userMakeLogin( response.resource );
                 
                 navigate( '/tablatures' );

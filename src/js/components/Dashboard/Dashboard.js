@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { TablaturesContext } from '../../contexts/TablaturesContext';
 
 import * as tablatureService from '../../services/tablatureService';
 import TablatureItem from '../Tablatures/TablatureItem.js';
 
 const Dashboard = () => {
 	
-	const [tablatures, setTablatures] = useState( {} );
-	
-	useEffect( () => {
-        tablatureService.getPublished()
-            .then( result => {
-                //console.log( result );
-                setTablatures( result );
-            } );
-    }, [] );
+	const { tablatures } = useContext( TablaturesContext );
     
     const onDeleteHandler = ( tabId ) => { };
     

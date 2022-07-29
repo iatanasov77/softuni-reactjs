@@ -1,39 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import { AuthContext } from '../../contexts/AuthContext';
-import * as tablatureService from '../../services/tablatureService';
+import { TablaturesContext } from '../../contexts/TablaturesContext';
+
 import TablatureItem from './TablatureItem.js';
 
 const MyTablatures = () => {
 	
-	const { user } = useContext( AuthContext );
-	const [tablatures, setTablatures] = useState( [] );
-    
-    useEffect( () => {
-        loadTablatures();
-    }, [] );
-    
-    const onDeleteHandler = ( tabId ) => {
-    
-        tablatureService.deleteTablature( tabId )
-            .then( result => {
-                //console.log( result );
-                if ( result.status == 'success' ) {
-                    loadTablatures();
-                } else {
-                    alert( 'ERROR !!!' ); 
-                }
-            } );
-    };
-    
-    function loadTablatures()
-    {
-        tablatureService.getMyTablatures( user.id )
-                        .then( result => {
-                            //console.log( result );
-                            setTablatures( result );
-                        } );
-    }
+	const { tablatures } = useContext( TablaturesContext );
     
 	return (
         <div className="tablatures-container" style={{marginTop: "110px"}}>
@@ -51,7 +24,7 @@ const MyTablatures = () => {
                         <tbody>
           
 	                        { tablatures.length > 0
-	                        	? tablatures.map( x => <TablatureItem key={x.id} tablature={x} onDeleteHandler={onDeleteHandler} /> )
+	                        	? tablatures.map( x => <TablatureItem key={x.id} tablature={x} /> )
 	                        	: <tr><td colSpan="3">No Tablatures</td></tr>
 	                        }
                         

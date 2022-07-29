@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { AuthContext } from '../../contexts/AuthContext';
+import { TablaturesContext } from '../../contexts/TablaturesContext';
 
-const SubmitTablature = ( {addTablatureHandler} ) => {
+const SubmitTablature = () => {
 
     const { user } = useContext( AuthContext );
+    const { addTablatureHandler } = useContext( TablaturesContext );
     
     const [tablature, setTablature] 		= useState({
         user_id: user.id,

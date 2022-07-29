@@ -116,6 +116,7 @@ dist
 
 ###> package managers and webpack ###
 /yarn.lock
+/webpack-stats.json
 /build/
 ###< package managers ###
 

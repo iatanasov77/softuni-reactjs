@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import SubmitTablature from './SubmitTablature';
 import UserLogin from './UserLogin';
 
-const Navigation = ( {addTablatureHandler} ) => {
+const Navigation = () => {
 
     const { user } = useContext( AuthContext );
     
@@ -32,7 +32,7 @@ const Navigation = ( {addTablatureHandler} ) => {
                     </Link>
                 </li>
                 
-                <SubmitTablature addTablatureHandler={addTablatureHandler} />
+                <SubmitTablature />
                 
                 <li className="nav-item">
                     <Link to="/logout" className="nav-link">

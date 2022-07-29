@@ -77,7 +77,7 @@ const UserRegister = () => {
                 console.log( response );
                 
                 userMakeLogin( response.resource );
-                navigate( '/' );
+                navigate( '/tablatures' );
             },
             function() {
                 console.log( 'AJAX ERROR !!!' );

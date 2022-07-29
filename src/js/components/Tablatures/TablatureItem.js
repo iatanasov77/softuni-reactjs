@@ -2,15 +2,17 @@ import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
+import { TablaturesContext } from '../../contexts/TablaturesContext';
 
-const TablatureItem = ( {tablature, onDeleteHandler} ) => {
+const TablatureItem = ( {tablature} ) => {
     
     const { user } = useContext( AuthContext );
+    const { deleteTablatureHandler } = useContext( TablaturesContext );
     
     const onDelete = ( e ) => {
         e.preventDefault();
         
-        onDeleteHandler( tablature.id );
+        deleteTablatureHandler ( tablature.id );
     };
     
 	return (

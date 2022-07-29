@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
+import { TablaturesContext } from '../../contexts/TablaturesContext';
 import * as tablatureService from '../../services/tablatureService';
 
 const TablatureUpdate = () => {
 
     const { user } = useContext( AuthContext );
-    const navigate = useNavigate();
+    const { updateTablatureHandler } = useContext( TablaturesContext );
     
     let { tabId }                   = useParams();
     const [tablature, setTablature] = useState( {
@@ -29,19 +30,8 @@ const TablatureUpdate = () => {
         formData.append( 'tablature_file', selectedFile );
         formData.append( 'published', tablature.published );
         
-        tablatureService.updateTablature(
-            tabId,
-            formData,
-            function( response ) {
-                console.log( 'AJAX SUCCESS !!!' );
-                
-                e.target.reset();
-                navigate( '/tablatures' );
-            },
-            function() {
-                console.log( 'AJAX ERROR !!!' );
-            }
-        );
+        updateTablatureHandler( tabId, formData )
+        e.target.reset();
     };
     
     const onChange  = ( e ) => {
@@ -61,7 +51,6 @@ const TablatureUpdate = () => {
     useEffect( () => {
         tablatureService.getOne( tabId )
             .then( result => {
-                //console.log( result );
                 if ( result.status == 'success' ) {
                     setTablature( result.resource );
                 }
