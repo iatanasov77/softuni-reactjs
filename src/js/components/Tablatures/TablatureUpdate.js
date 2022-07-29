@@ -27,6 +27,8 @@ const TablatureUpdate = () => {
         e.preventDefault();
         
         let formData = new FormData( e.target );
+        
+        formData.append( 'user_id', tablature.user_id );
         formData.append( 'tablature_file', selectedFile );
         formData.append( 'published', tablature.published );
         
@@ -65,7 +67,6 @@ const TablatureUpdate = () => {
                 </div>
                 <div className="card-body">
                     <form className="px-4 py-3" id="formTtablatureUpdate" onSubmit={onSubmit} >
-                        <input type="hidden" name="user_id" value={tablature.user_id} />
                         
                         <div className="form-check mb-3">
                             <input
