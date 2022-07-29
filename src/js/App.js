@@ -9,8 +9,8 @@ import UserLogout from './components/Authentication/UserLogout';
 
 import HomePage from './components/HomePage';
 
-import ButtonIcons from './components/Tablatures/PlayerControls/ButtonIcons';
-import Player from './components/Tablatures/Player';
+import ButtonIcons from './components/Tablatures/Player/PlayerControls/ButtonIcons';
+import Player from './components/Tablatures/Player/Player';
 
 /*
  READ THIS: https://linguinecode.com/post/code-splitting-react-router-with-react-lazy-and-react-suspense

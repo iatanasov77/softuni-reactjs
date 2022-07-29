@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from 'react-router-dom';
 
-import * as tablatureService from '../../services/tablatureService';
+import * as tablatureService from '../../../services/tablatureService';
 import PlayerControls from './PlayerControls';
 
 const Player = () => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { AuthContext } from '../../contexts/AuthContext';
-import * as tablatureService from '../../services/tablatureService';
+import { AuthContext } from '../../../contexts/AuthContext';
+import * as tablatureService from '../../../services/tablatureService';
 
 import InformationItem from './PlayerControls/InformationItem';
 import LayoutItem from './PlayerControls/LayoutItem';
