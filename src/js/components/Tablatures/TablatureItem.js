@@ -20,7 +20,7 @@ const TablatureItem = ( {tablature} ) => {
             <td>{ tablature.artist }</td>
             <td>{ tablature.song }</td>
             <td>
-                <Link to={`/tablatures/${tablature.id}/play`} className="btn btn-primary">
+                <Link to={`/tablatures/${tablature.id}/play`} className="btn btn-primary" >
                 	Play
                 </Link>
                 
@@ -31,7 +31,7 @@ const TablatureItem = ( {tablature} ) => {
                   
                 { tablature.createdBy == user.id
                     ? (
-                        <Link to={`/tablatures/${tablature.id}/update`} className="btn btn-primary ml-4">
+                        <Link to={`/tablatures/${tablature.id}/update`} className="btn btn-primary ml-4" >
                             Edit
                         </Link>
                       )
@@ -40,7 +40,7 @@ const TablatureItem = ( {tablature} ) => {
                 
                 { tablature.createdBy == user.id
                     ? (
-                        <Link className="btn btn-primary ml-4" onClick={onDelete}>
+                        <Link to={`/tablatures/${tablature.id}/delete`} className="btn btn-primary ml-4" onClick={onDelete} >
                             Delete
                         </Link>
                       )
