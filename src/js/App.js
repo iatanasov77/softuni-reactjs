@@ -7,7 +7,7 @@ import { TablaturesProvider } from './contexts/TablaturesContext';
 import Navigation from './components/Navigation';
 import UserLogout from './components/Authentication/UserLogout';
 
-import Dashboard from './components/Dashboard';
+import HomePage from './components/HomePage';
 
 import ButtonIcons from './components/Tablatures/PlayerControls/ButtonIcons';
 import Player from './components/Tablatures/Player';
@@ -68,7 +68,7 @@ function App()
                     <Routes>
         				<Route path="/" element={
         				    <Suspense fallback={<span>Loading ....</span>} >
-        					   <Dashboard />
+        					   <HomePage />
         					</Suspense>
         				} />
         				

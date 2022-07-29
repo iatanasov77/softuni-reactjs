@@ -4,7 +4,7 @@ import { TablaturesContext } from '../contexts/TablaturesContext';
 
 import TablatureItem from './Tablatures/TablatureItem.js';
 
-const Dashboard = () => {
+const HomePage = () => {
 	
 	const { tablatures } = useContext( TablaturesContext );
     
@@ -36,4 +36,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default HomePage;
