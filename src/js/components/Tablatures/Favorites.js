@@ -1,21 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import { AuthContext } from '../../contexts/AuthContext';
-import * as tablatureService from '../../services/tablatureService';
+import { TablaturesContext } from '../../contexts/TablaturesContext';
 import TablatureItem from './TablatureItem.js';
 
 const Favorites = () => {
-	
-	const { user } = useContext( AuthContext );
-	const [tablatures, setTablatures] = useState( [] );
-    
-    useEffect( () => {
-        tablatureService.getMyFavorites( user.id )
-            .then( result => {
-                //console.log( result );
-                setTablatures( result );
-            } );
-    }, [] );
+
+	const { tablatures } = useContext( TablaturesContext );
     
 	return (
         <div className="tablatures-container" style={{marginTop: "110px"}}>
