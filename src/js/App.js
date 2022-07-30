@@ -12,18 +12,10 @@ import HomePage from './components/HomePage';
 import ButtonIcons from './components/Tablatures/Player/PlayerControls/ButtonIcons';
 import Player from './components/Tablatures/Player/Player';
 
-/*
- READ THIS: https://linguinecode.com/post/code-splitting-react-router-with-react-lazy-and-react-suspense
-
 const UserRegister      = lazy( () => import( './components/Authentication/UserRegister' ) );
 const MyTablatures      = lazy( () => import( './components/Tablatures/MyTablatures' ) );
 const Favorites         = lazy( () => import( './components/Tablatures/Favorites' ) );
 const TablatureUpdate   = lazy( () => import( './components/Tablatures/TablatureUpdate' ) );
-*/
-import UserRegister from './components/Authentication/UserRegister';
-import MyTablatures from './components/Tablatures/MyTablatures';
-import Favorites from './components/Tablatures/Favorites';
-import TablatureUpdate from './components/Tablatures/TablatureUpdate';
 
 function App()
 {
@@ -76,7 +68,9 @@ function App()
         				} />
         				
         				<Route path="/register" element={
-                            <UserRegister />
+                            <Suspense fallback={<span>Loading....</span>} >
+                                <UserRegister />
+                            </Suspense>
                         } />
                         
                         <Route path="/logout" element={
