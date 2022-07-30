@@ -4,11 +4,12 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { TablaturesProvider } from './contexts/TablaturesContext';
 
+import Alerts from './components/Common/Alerts';
+import PrivateGuard from './components/Common/PrivateGuard';
+
 import Navigation from './components/Navigation';
 import UserLogout from './components/Authentication/UserLogout';
-
 import HomePage from './components/HomePage';
-import ApplicationAlerts from './components/ApplicationAlerts';
 
 import ButtonIcons from './components/Tablatures/Player/PlayerControls/ButtonIcons';
 import Player from './components/Tablatures/Player/Player';
@@ -39,7 +40,7 @@ function App()
                         </div>
                     </nav>
                     
-                    <ApplicationAlerts />
+                    <Alerts />
                     
                     {/* Main Content */}
                     <Routes>
@@ -55,33 +56,38 @@ function App()
                             </Suspense>
                         } />
                         
-                        <Route path="/logout" element={
-                            <UserLogout />
-                        } />
-        				
-        				<Route path="/tablatures" element={
-        				    <Suspense fallback={<span>Loading ....</span>} >
-        					   <MyTablatures />
-        					</Suspense>
-        				} />
-        				
-        				<Route path="/favorites" element={
-        				    <Suspense fallback={<span>Loading ....</span>} >
-                                <Favorites />
-                            </Suspense>
-                        } />
-        				
         				<Route path="/tablatures/:tabId/play" element={
-        					<Suspense fallback={<span>Loading ....</span>} >
-        						<Player />
-        					</Suspense>
-        				} />
-        				
-        				<Route path="/tablatures/:tabId/update" element={
                             <Suspense fallback={<span>Loading ....</span>} >
-                                <TablatureUpdate />
+                                <Player />
                             </Suspense>
                         } />
+                        
+        				<Route element={<PrivateGuard />} >
+        				
+            				<Route path="/tablatures" element={
+            				    <Suspense fallback={<span>Loading ....</span>} >
+            					   <MyTablatures />
+            					</Suspense>
+            				} />
+            				
+            				<Route path="/favorites" element={
+            				    <Suspense fallback={<span>Loading ....</span>} >
+                                    <Favorites />
+                                </Suspense>
+                            } />
+                            
+            				<Route path="/tablatures/:tabId/update" element={
+                                <Suspense fallback={<span>Loading ....</span>} >
+                                    <TablatureUpdate />
+                                </Suspense>
+                            } />
+                        
+                            <Route path="/logout" element={
+                                <UserLogout />
+                            } />
+                            
+        				</Route>
+        				
         			</Routes>
         			
         			{/* Footer */}

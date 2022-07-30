@@ -50,7 +50,7 @@ export const TablaturesProvider = ({
                             
                             if( result.status == 'success' ) {
                                 setTablatures( result.resources );
-                            } else {
+                            } else if( result.status == 'error' ) {
                                 setTablatures( [] );
                                 
                                 $( '#ErrorApplicationAlertsBody' ).html( result.message );
@@ -68,7 +68,7 @@ export const TablaturesProvider = ({
                             
                             if( result.status == 'success' ) {
                                 setTablatures( result.resources );
-                            } else {
+                            } else if( result.status == 'error' ) {
                                 setTablatures( [] );
                                 
                                 $( '#ErrorApplicationAlertsBody' ).html( result.message );
@@ -92,7 +92,7 @@ export const TablaturesProvider = ({
                     $( '#btnSubmitTablature' ).dropdown( 'toggle' );
                     
                     document.location.reload();
-                } else {
+                } else if( response.status == 'error' ) {
                     //setTablatures( [] );
                     
                     $( '#btnSubmitTablature' ).dropdown( 'toggle' );
@@ -115,7 +115,7 @@ export const TablaturesProvider = ({
             function( response ) {
                 if( response.status == 'success' ) {
                     navigate( '/tablatures' );
-                } else {
+                } else if( response.status == 'error' ) {
                     $( '#btnSubmitTablature' ).dropdown( 'toggle' );
                     $( '#ErrorApplicationAlertsBody' ).html( response.message );
                     $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
@@ -136,7 +136,7 @@ export const TablaturesProvider = ({
                             if( result.status == 'success' ) {
                                 navigate( '/tablatures' );
                                 document.location.reload();
-                            } else {
+                            } else if( result.status == 'error' ) {
                                 $( '#ErrorApplicationAlertsBody' ).html( result.message );
                                 $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                                 $( '#ErrorApplicationAlerts' ).addClass( 'show' );
@@ -156,7 +156,7 @@ export const TablaturesProvider = ({
                                 $( '#ApplicationAlertsBody' ).html( 'This Tablature is Added to Your Favorites !' );
                                 $( '#ApplicationAlerts' ).removeClass( 'd-none' );
                                 $( '#ApplicationAlerts' ).addClass( 'show' );
-                            } else {
+                            } else if( result.status == 'error' ) {
                                 $( '#ErrorApplicationAlertsBody' ).html( result.message );
                                 $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                                 $( '#ErrorApplicationAlerts' ).addClass( 'show' );

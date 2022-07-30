@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 
-const ApplicationAlerts = () => {
+const Alerts = () => {
     
     const location = useLocation();
     
@@ -46,4 +46,4 @@ const ApplicationAlerts = () => {
     );
 }
 
-export default ApplicationAlerts;
+export default Alerts;
