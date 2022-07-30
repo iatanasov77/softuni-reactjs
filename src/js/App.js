@@ -6,6 +6,7 @@ import { TablaturesProvider } from './contexts/TablaturesContext';
 
 import Alerts from './components/Common/Alerts';
 import PrivateGuard from './components/Common/PrivateGuard';
+import PublicGuard from './components/Common/PublicGuard';
 
 import Navigation from './components/Navigation';
 import UserLogout from './components/Authentication/UserLogout';
@@ -50,17 +51,21 @@ function App()
         					</Suspense>
         				} />
         				
-        				<Route path="/register" element={
-                            <Suspense fallback={<span>Loading....</span>} >
-                                <UserRegister />
-                            </Suspense>
-                        } />
-                        
         				<Route path="/tablatures/:tabId/play" element={
                             <Suspense fallback={<span>Loading ....</span>} >
                                 <Player />
                             </Suspense>
                         } />
+                        
+                        <Route element={<PublicGuard />} >
+                        
+                            <Route path="/register" element={
+                                <Suspense fallback={<span>Loading....</span>} >
+                                    <UserRegister />
+                                </Suspense>
+                            } />
+                        
+                        </Route>
                         
         				<Route element={<PrivateGuard />} >
         				
