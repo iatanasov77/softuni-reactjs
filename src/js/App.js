@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { TablaturesProvider } from './contexts/TablaturesContext';
@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import UserLogout from './components/Authentication/UserLogout';
 
 import HomePage from './components/HomePage';
+import ApplicationAlerts from './components/ApplicationAlerts';
 
 import ButtonIcons from './components/Tablatures/Player/PlayerControls/ButtonIcons';
 import Player from './components/Tablatures/Player/Player';
@@ -19,15 +20,6 @@ const TablatureUpdate   = lazy( () => import( './components/Tablatures/Tablature
 
 function App()
 {
-	const location = useLocation();
-	
-    useEffect( () => {
-        $( '#ApplicationAlerts' ).addClass( 'd-none' );
-        $( '#ApplicationAlerts' ).removeClass( 'show' );
-        $( '#ApplicationAlertsBody' ).html( '' );
-        
-    }, [location] );
-    
     return (
         <AuthProvider>
             <TablaturesProvider>
@@ -47,17 +39,7 @@ function App()
                         </div>
                     </nav>
                     
-                    {/* Alerts Box */}
-                    <div id="ApplicationAlerts"
-                        className="alert alert-block alert-info fade in d-none"
-                        style={{position: "absolute", top: "90px", zIndex: "10", width: "98%"}}
-                    > 
-                        <button type="button" className="close close-sm" data-dismiss="alert">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        
-                        <div id="ApplicationAlertsBody" />
-                    </div>
+                    <ApplicationAlerts />
                     
                     {/* Main Content */}
                     <Routes>

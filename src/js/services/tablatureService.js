@@ -13,15 +13,15 @@ export const getAll = () => {
 			.then( res => res.json() );
 };
 
-/* 
- * https://symfony.com/doc/5.2/security/guard_authentication.html
- */
-export const getPublished_Async = async () => {
+export const getPublished = () => {
+    return fetch( `${apiUrl}/published` )
+            .then( res => res.json() );
+};
+
+export const getMyTablatures = async ( apiToken ) => {
     let buildRequest;
     
-    let data        = {};
-    let apiToken    = 'REAL';
-    buildRequest    =  fetch( `${apiUrl}/published`, {
+    buildRequest    =  fetch( `${apiUrl}/my-tablatures`, {
         method: 'GET',
         headers: {
             'X-AUTH-TOKEN': apiToken
@@ -34,19 +34,20 @@ export const getPublished_Async = async () => {
     return result;
 };
 
-export const getPublished = () => {
-    return fetch( `${apiUrl}/published` )
-            .then( res => res.json() );
-};
-
-export const getMyTablatures = ( userId ) => {
-    return fetch( `${apiUrl}/my-tablatures/${userId}` )
-            .then( res => res.json() );
-};
-
-export const getMyFavorites = ( userId ) => {
-    return fetch( `${apiUrl}/my-favorites/${userId}` )
-            .then( res => res.json() );
+export const getMyFavorites = async ( apiToken ) => {
+    let buildRequest;
+    
+    buildRequest    =  fetch( `${apiUrl}/my-favorites`, {
+        method: 'GET',
+        headers: {
+            'X-AUTH-TOKEN': apiToken
+        }
+    });
+           
+    const response  = await buildRequest;
+    const result    = await response.json();
+    
+    return result;
 };
 
 export const getOne = ( tabId ) => {
@@ -54,9 +55,14 @@ export const getOne = ( tabId ) => {
 			.then( res => res.json() );
 };
 
-export const createTablature = ( formData, successCallback, errorCallback ) => {
+export const createTablature = ( apiToken, formData, successCallback, errorCallback ) => {
+    // Work-Around
+    formData.append( 'apiToken', apiToken );
+    
 	$.ajax({
 	    url: `${apiUrl}/tablatures-new`,
+	    //beforeSend: function( xhr ){ xhr.setRequestHeader( 'X-AUTH-TOKEN', apiToken ); },
+	    //headers: {"X-AUTH-TOKEN": apiToken},
 	    data: formData,
 	    type: "POST",
 	    contentType: false,
@@ -66,7 +72,10 @@ export const createTablature = ( formData, successCallback, errorCallback ) => {
 	});
 }
 
-export const updateTablature = ( tabId, formData, successCallback, errorCallback ) => {
+export const updateTablature = ( apiToken, tabId, formData, successCallback, errorCallback ) => {
+    // Work-Around
+    formData.append( 'apiToken', apiToken );
+    
     $.ajax({
         url: `${apiUrl}/tablatures/${tabId}/update`,
         data: formData,
@@ -78,16 +87,34 @@ export const updateTablature = ( tabId, formData, successCallback, errorCallback
     });
 }
 
-export const deleteTablature = ( tabId ) => {
-    return fetch( `${apiUrl}/tablatures/${tabId}/delete` )
-            .then( res => res.json() );
+export const deleteTablature = async ( apiToken, tabId ) => {
+    let buildRequest;
+    
+    buildRequest    =  fetch( `${apiUrl}/tablatures/${tabId}/delete`, {
+        method: 'GET',
+        headers: {
+            'X-AUTH-TOKEN': apiToken
+        }
+    });
+           
+    const response  = await buildRequest;
+    const result    = await response.json();
+    
+    return result;
 };
 
-export const addToFavorites = ( tabId, userId, successCallback, errorCallback ) => {    
-    $.ajax({
-        url: `${apiUrl}/tablatures/${tabId}/add-favorite-${userId}`,
-        type: "GET",
-        success: successCallback,
-        error: errorCallback
+export const addToFavorites = async ( apiToken, tabId ) => {
+    let buildRequest;
+    
+    buildRequest    =  fetch( `${apiUrl}/tablatures/${tabId}/add-favorite`, {
+        method: 'GET',
+        headers: {
+            'X-AUTH-TOKEN': apiToken
+        }
     });
+           
+    const response  = await buildRequest;
+    const result    = await response.json();
+    
+    return result;
 };

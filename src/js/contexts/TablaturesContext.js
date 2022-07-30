@@ -44,19 +44,37 @@ export const TablaturesProvider = ({
     
     function loadMyTablatures()
     {
-        tablatureService.getMyTablatures( user.id )
+        tablatureService.getMyTablatures( user.apiToken )
                         .then( result => {
                             //console.log( result );
-                            setTablatures( result );
+                            
+                            if( result.status == 'success' ) {
+                                setTablatures( result.resources );
+                            } else {
+                                setTablatures( [] );
+                                
+                                $( '#ErrorApplicationAlertsBody' ).html( result.message );
+                                $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+                                $( '#ErrorApplicationAlerts' ).addClass( 'show' );
+                            }
                         } );
     }
     
     function loadMyFavorites()
     {
-        tablatureService.getMyFavorites( user.id )
+        tablatureService.getMyFavorites( user.apiToken )
                         .then( result => {
                             //console.log( result );
-                            setTablatures( result );
+                            
+                            if( result.status == 'success' ) {
+                                setTablatures( result.resources );
+                            } else {
+                                setTablatures( [] );
+                                
+                                $( '#ErrorApplicationAlertsBody' ).html( result.message );
+                                $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+                                $( '#ErrorApplicationAlerts' ).addClass( 'show' );
+                            }
                         } );
     }
     
@@ -64,12 +82,24 @@ export const TablaturesProvider = ({
         //console.log( Object.fromEntries( formData ) );
         
         tablatureService.createTablature(
+            user.apiToken,
             formData,
             function( response ) {
-                navigate( '/tablatures' );
-                $( '#btnSubmitTablature' ).dropdown( 'toggle' );
-                
-                document.location.reload();
+                if( response.status == 'success' ) {
+                    //setTablatures( response.resource );
+                    
+                    navigate( '/tablatures' );
+                    $( '#btnSubmitTablature' ).dropdown( 'toggle' );
+                    
+                    document.location.reload();
+                } else {
+                    //setTablatures( [] );
+                    
+                    $( '#btnSubmitTablature' ).dropdown( 'toggle' );
+                    $( '#ErrorApplicationAlertsBody' ).html( response.message );
+                    $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+                    $( '#ErrorApplicationAlerts' ).addClass( 'show' );
+                }
             },
             function() {
                 console.log( 'AJAX ERROR !!!' );
@@ -79,10 +109,18 @@ export const TablaturesProvider = ({
     
     const updateTablatureHandler = ( tabId, formData ) => {
         tablatureService.updateTablature(
+            user.apiToken,
             tabId,
             formData,
             function( response ) {
-                navigate( '/tablatures' );
+                if( response.status == 'success' ) {
+                    navigate( '/tablatures' );
+                } else {
+                    $( '#btnSubmitTablature' ).dropdown( 'toggle' );
+                    $( '#ErrorApplicationAlertsBody' ).html( response.message );
+                    $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+                    $( '#ErrorApplicationAlerts' ).addClass( 'show' );
+                }
             },
             function() {
                 console.log( 'AJAX ERROR !!!' );
@@ -92,21 +130,48 @@ export const TablaturesProvider = ({
     
     const deleteTablatureHandler = ( tabId ) => {
     
-        tablatureService.deleteTablature( tabId )
+        tablatureService.deleteTablature( user.apiToken, tabId )
                         .then( result => {
                             //console.log( result );
-                            if ( result.status == 'success' ) {
+                            if( result.status == 'success' ) {
                                 navigate( '/tablatures' );
-                                
                                 document.location.reload();
                             } else {
-                                alert( 'ERROR !!!' ); 
+                                $( '#ErrorApplicationAlertsBody' ).html( result.message );
+                                $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+                                $( '#ErrorApplicationAlerts' ).addClass( 'show' );
+                            }
+                        } );
+    };
+    
+    const addToFavoritesHandler = ( tabId ) => {
+        tablatureService.addToFavorites( user.apiToken, tabId )
+                        .then( result => {
+                            //console.log( result );
+                            
+                            if( result.status == 'success' ) {
+                                $( '#ApplicationAlerts' ).css( "left", "120px" );
+                                $( '#ApplicationAlerts' ).css( "width", "90%" );
+                                
+                                $( '#ApplicationAlertsBody' ).html( 'This Tablature is Added to Your Favorites !' );
+                                $( '#ApplicationAlerts' ).removeClass( 'd-none' );
+                                $( '#ApplicationAlerts' ).addClass( 'show' );
+                            } else {
+                                $( '#ErrorApplicationAlertsBody' ).html( result.message );
+                                $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+                                $( '#ErrorApplicationAlerts' ).addClass( 'show' );
                             }
                         } );
     };
     
     return (
-        <TablaturesContext.Provider value={{tablatures: tablatures, addTablatureHandler, updateTablatureHandler, deleteTablatureHandler }}>
+        <TablaturesContext.Provider value={{
+            tablatures: tablatures,
+            addTablatureHandler,
+            updateTablatureHandler,
+            deleteTablatureHandler,
+            addToFavoritesHandler
+        }}>
             {children}
         </TablaturesContext.Provider>
     );

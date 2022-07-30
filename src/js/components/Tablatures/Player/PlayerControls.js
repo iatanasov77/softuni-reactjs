@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { AuthContext } from '../../../contexts/AuthContext';
-import * as tablatureService from '../../../services/tablatureService';
+import { TablaturesContext } from '../../../contexts/TablaturesContext';
 
 import InformationItem from './PlayerControls/InformationItem';
 import LayoutItem from './PlayerControls/LayoutItem';
@@ -15,6 +15,8 @@ const PlayerControls = ( {player} ) => {
     let { tabId }   = useParams();
     
     const { user } = useContext( AuthContext );
+    const { addToFavoritesHandler } = useContext( TablaturesContext );
+    
     const [playerState, setPlayerState]     = useState( null );
     const [loopingState, setLoopingState]   = useState( null );
     
@@ -64,21 +66,7 @@ const PlayerControls = ( {player} ) => {
     }
 
     function favorite() {         
-        tablatureService.addToFavorites(
-            tabId,
-            user.id,
-            function( response ) {
-                $( '#ApplicationAlerts' ).css( "left", "120px" );
-                $( '#ApplicationAlerts' ).css( "width", "90%" );
-                
-                $( '#ApplicationAlertsBody' ).html( 'This Tablature is Added to Your Favorites !' );
-                $( '#ApplicationAlerts' ).removeClass( 'd-none' );
-                $( '#ApplicationAlerts' ).addClass( 'show' );
-            },
-            function() {
-                console.log( 'AJAX ERROR !!!' );
-            }
-        );
+        addToFavoritesHandler( tabId );
     }
     
     function loopingHandler() {
@@ -145,7 +133,7 @@ const PlayerControls = ( {player} ) => {
                 <PrintItem player={player} />
                 
                 {/* Add to Favorites Button */}
-                { ( user.id ) ? (
+                { ( user.apiToken ) ? (
                     <div className="player-controls__item favorite" onClick={favorite}>
                         <svg className="icon">
                             <use xlinkHref="#icon-heart"></use>

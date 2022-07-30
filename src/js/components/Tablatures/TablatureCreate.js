@@ -60,7 +60,6 @@ const TablatureCreate = () => {
             <div className="dropdown-menu dropdown-menu-right dropdown-tablature-form">
                
                 <form className="px-4 py-3" onSubmit={onSubmit} >
-                    <input type="hidden" name="user_id" value={tablature.user_id} />
                     
                     <div className="form-check mb-3">
                         <input

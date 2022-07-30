@@ -28,7 +28,6 @@ const TablatureUpdate = () => {
         
         let formData = new FormData( e.target );
         
-        formData.append( 'user_id', tablature.user_id );
         formData.append( 'tablature_file', selectedFile );
         formData.append( 'published', tablature.published );
         
