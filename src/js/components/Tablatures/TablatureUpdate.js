@@ -113,6 +113,7 @@ const TablatureUpdate = () => {
                             <div className="custom-file">
                                 <input
                                     type="file"
+                                    accept=".gp,.gp3,.gp4,.gp5,audio/x-guitar-pro"
                                     id="tablature_form_tablature"
                                     name="tablature_file"
                                     className="custom-file-input"

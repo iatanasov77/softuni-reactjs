@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+/**
+ * How to Set Expiry Time (TTL) for LocalStorage With Javascript
+ * ==============================================================================
+ * https://www.sohamkamani.com/blog/javascript-localstorage-with-ttl-expiry/
+ */
 export const useLocalStorage = ( key, defaultValue ) => {
     
     const [value, setValue] = useState( () => {
