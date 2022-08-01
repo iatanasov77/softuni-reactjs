@@ -41,6 +41,14 @@ const TablatureCreate = () => {
 	const onSelectTablatureFile = ( e ) => {
         let file    = e.target.files[0];
         
+        if ( file.size > 1000000 ) { // Size > 1 MB ( Gore-Dolo :) )
+            $( '#ErrorApplicationAlertsBody' ).html( 'Too Big Tablature File Size !!! ' );
+            $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
+            $( '#ErrorApplicationAlerts' ).addClass( 'show' );
+            
+            return false;
+        }
+
         setSelectedFile( file );
         $( '#tablature_form_tablature_label' ).html( file.name );
     };
