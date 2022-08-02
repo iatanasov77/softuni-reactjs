@@ -86,15 +86,11 @@ export const TablaturesProvider = ({
             formData,
             function( response ) {
                 if( response.status == 'success' ) {
-                    //setTablatures( response.resource );
+                    setTablatures( tablatures => [response.resource, ...tablatures] );
                     
                     navigate( '/tablatures' );
                     $( '#btnSubmitTablature' ).dropdown( 'toggle' );
-                    
-                    document.location.reload();
                 } else if( response.status == 'error' ) {
-                    //setTablatures( [] );
-                    
                     $( '#btnSubmitTablature' ).dropdown( 'toggle' );
                     $( '#ErrorApplicationAlertsBody' ).html( response.message );
                     $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
@@ -134,8 +130,8 @@ export const TablaturesProvider = ({
                         .then( result => {
                             //console.log( result );
                             if( result.status == 'success' ) {
+                                setTablatures( tablatures.filter( (tablature) => tablature.id !== tabId ) );
                                 navigate( '/tablatures' );
-                                document.location.reload();
                             } else if( result.status == 'error' ) {
                                 $( '#ErrorApplicationAlertsBody' ).html( result.message );
                                 $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
