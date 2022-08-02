@@ -19,6 +19,7 @@ const TablatureItem = ( {tablature} ) => {
 		<tr>
             <td>{ tablature.artist }</td>
             <td>{ tablature.song }</td>
+            <td>{ tablature.owner }</td>
             <td>
                 <Link to={`/tablatures/${tablature.id}/play`} className="btn btn-primary" >
                 	Play

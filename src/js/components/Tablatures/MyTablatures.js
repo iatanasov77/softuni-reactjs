@@ -18,6 +18,7 @@ const MyTablatures = () => {
                             <tr>
                                 <th>Artist</th>
                                 <th>Song</th>
+                                <th>Owner</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
