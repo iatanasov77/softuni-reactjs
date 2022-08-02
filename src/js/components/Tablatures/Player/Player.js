@@ -93,9 +93,7 @@ const Player = () => {
 	                <h3 className="album"></h3>
 	                
 	            </div>
-	            <div id="alphaTab" ref={scoreBodyRef}
-	                data-add-favorite-url={`${remoteUrl}/tablatures/${tabId}/add-favorite`}
-	            ></div>
+	            <div id="alphaTab" ref={scoreBodyRef}></div>
 	        </div>
 	    </div>
 	);
