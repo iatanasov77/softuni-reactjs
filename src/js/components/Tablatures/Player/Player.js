@@ -48,7 +48,8 @@ const Player = () => {
                 enablePlayer: true,
                 enableUserInteraction: true,
                 enableCursor: true,
-                soundFont: `${appUrl}/soundfont/sonivox.sf2`
+                //soundFont: `${appUrl}/soundfont/sonivox.sf2`
+                soundFont: '/soundfont/sonivox.sf2'
             },
 		    logging: 'debug',
 		});

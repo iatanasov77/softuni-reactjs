@@ -1,4 +1,11 @@
+/**
+ * Api Server Url
+ */
+//export const apiUrl         = 'http://softuni.lh';
+export const apiUrl         = 'http://softuni-api.vankosoft.org';
 
-export const apiUrl         = 'http://softuni.lh';
+/**
+ *  Application URL
+ */
 export const applicationUrl = 'http://reactjs.lh';
 
