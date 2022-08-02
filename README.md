@@ -10,7 +10,7 @@ for SoftUni ReactJs Exam.
 You can find many tablature files on internet, but on very few places you can played its for free.
 
 
-For Test The Project I have submitted several tablature files in this repository in 'docs/Test_Tablatures' or can download for example from here https://guitarprotabs.org/
+For Test The Project I have submitted several tablature files in this repository in 'docs/Test_Tablatures' or you can download for example from here https://guitarprotabs.org/
 
 
 
