@@ -47,7 +47,9 @@ export const TablaturesProvider = ({
         tablatureService.getMyTablatures( user.apiToken )
                         .then( result => {
                             //console.log( result );
+                            setTablatures( result );
                             
+                            /*
                             if( result.status == 'success' ) {
                                 setTablatures( result.resources );
                             } else if( result.status == 'error' ) {
@@ -57,6 +59,7 @@ export const TablaturesProvider = ({
                                 $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                                 $( '#ErrorApplicationAlerts' ).addClass( 'show' );
                             }
+                            */
                         } );
     }
     
@@ -65,7 +68,9 @@ export const TablaturesProvider = ({
         tablatureService.getMyFavorites( user.apiToken )
                         .then( result => {
                             //console.log( result );
+                            setTablatures( result );
                             
+                            /*
                             if( result.status == 'success' ) {
                                 setTablatures( result.resources );
                             } else if( result.status == 'error' ) {
@@ -75,6 +80,7 @@ export const TablaturesProvider = ({
                                 $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                                 $( '#ErrorApplicationAlerts' ).addClass( 'show' );
                             }
+                            */
                         } );
     }
     
@@ -85,6 +91,12 @@ export const TablaturesProvider = ({
             user.apiToken,
             formData,
             function( response ) {
+                //console.log( response ); return;
+                setTablatures( tablatures => [response, ...tablatures] );
+                navigate( '/tablatures' );
+                $( '#btnSubmitTablature' ).dropdown( 'toggle' );
+                    
+                /*
                 if( response.status == 'success' ) {
                     setTablatures( tablatures => [response.resource, ...tablatures] );
                     
@@ -96,6 +108,7 @@ export const TablaturesProvider = ({
                     $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                     $( '#ErrorApplicationAlerts' ).addClass( 'show' );
                 }
+                */
             },
             function() {
                 console.log( 'AJAX ERROR !!!' );
@@ -109,6 +122,10 @@ export const TablaturesProvider = ({
             tabId,
             formData,
             function( response ) {
+                setTablatures( tablatures => [response, ...tablatures] );
+                navigate( '/tablatures' );
+            
+                /*
                 if( response.status == 'success' ) {
                     navigate( '/tablatures' );
                 } else if( response.status == 'error' ) {
@@ -117,6 +134,7 @@ export const TablaturesProvider = ({
                     $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                     $( '#ErrorApplicationAlerts' ).addClass( 'show' );
                 }
+                */
             },
             function() {
                 console.log( 'AJAX ERROR !!!' );
@@ -129,6 +147,10 @@ export const TablaturesProvider = ({
         tablatureService.deleteTablature( user.apiToken, tabId )
                         .then( result => {
                             //console.log( result );
+                            setTablatures( tablatures.filter( (tablature) => tablature.id !== tabId ) );
+                            navigate( '/tablatures' );
+                            
+                            /*
                             if( result.status == 'success' ) {
                                 setTablatures( tablatures.filter( (tablature) => tablature.id !== tabId ) );
                                 navigate( '/tablatures' );
@@ -137,6 +159,7 @@ export const TablaturesProvider = ({
                                 $( '#ErrorApplicationAlerts' ).removeClass( 'd-none' );
                                 $( '#ErrorApplicationAlerts' ).addClass( 'show' );
                             }
+                            */
                         } );
     };
     

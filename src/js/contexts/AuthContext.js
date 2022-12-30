@@ -10,11 +10,14 @@ export const AuthProvider = ({
     const [auth, setAuth] = useLocalStorage( 'auth', {} );
 
     const userMakeLogin = ( authData ) => {
-       setAuth( authData );
+        if( authData.token ) {
+            authData.apiToken   = authData.token;
+        }
+        setAuth( authData );
     };
     
     const userMakeLogout = () => {
-       setAuth( {} );
+        setAuth( {} );
     };
     
     return (

@@ -17,13 +17,6 @@ const UserLogout = () => {
     
     useEffect( () => {
         logout();
-        
-        /*
-        authService.logout( auth.apiToken )
-            .then( () => {
-                logout();
-            });
-        */
     });
 }
 

@@ -14,17 +14,17 @@ export const getAll = () => {
 };
 
 export const getPublished = () => {
-    return fetch( `${apiUrl}/published` )
+    return fetch( `${apiUrl}/api/latest-tablatures` )
             .then( res => res.json() );
 };
 
 export const getMyTablatures = async ( apiToken ) => {
     let buildRequest;
     
-    buildRequest    =  fetch( `${apiUrl}/my-tablatures`, {
+    buildRequest    =  fetch( `${apiUrl}/api/my-tablatures`, {
         method: 'GET',
         headers: {
-            'X-AUTH-TOKEN': apiToken
+            'Authorization': 'Bearer ' + apiToken
         }
     });
            
@@ -37,10 +37,10 @@ export const getMyTablatures = async ( apiToken ) => {
 export const getMyFavorites = async ( apiToken ) => {
     let buildRequest;
     
-    buildRequest    =  fetch( `${apiUrl}/my-favorites`, {
+    buildRequest    =  fetch( `${apiUrl}/api/my-favorites`, {
         method: 'GET',
         headers: {
-            'X-AUTH-TOKEN': apiToken
+            'Authorization': 'Bearer ' + apiToken
         }
     });
            
@@ -50,50 +50,53 @@ export const getMyFavorites = async ( apiToken ) => {
     return result;
 };
 
-export const getOne = ( tabId ) => {
-	return fetch( `${apiUrl}/tablatures/${tabId}` )
+export const getOne = ( apiToken, tabId ) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + apiToken
+        }
+    };
+    
+	return fetch( `${apiUrl}/api/tablatures/${tabId}`, requestOptions )
 			.then( res => res.json() );
 };
 
 export const createTablature = ( apiToken, formData, successCallback, errorCallback ) => {
-    // Work-Around
-    formData.append( 'apiToken', apiToken );
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + apiToken
+        },
+        body: formData
+    };
     
-	$.ajax({
-	    url: `${apiUrl}/tablatures-new`,
-	    //beforeSend: function( xhr ){ xhr.setRequestHeader( 'X-AUTH-TOKEN', apiToken ); },
-	    //headers: {"X-AUTH-TOKEN": apiToken},
-	    data: formData,
-	    type: "POST",
-	    contentType: false,
-	    processData: false,
-	    success: successCallback,
-	    error: errorCallback
-	});
+    fetch( `${apiUrl}/api/tablatures/new`, requestOptions )
+        .then( response => response.json() )
+        .then( data => successCallback( data ) );
 }
 
 export const updateTablature = ( apiToken, tabId, formData, successCallback, errorCallback ) => {
-    // Work-Around
-    formData.append( 'apiToken', apiToken );
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + apiToken
+        },
+        body: formData
+    };
     
-    $.ajax({
-        url: `${apiUrl}/tablatures/${tabId}/update`,
-        data: formData,
-        type: "POST",
-        contentType: false,
-        processData: false,
-        success: successCallback,
-        error: errorCallback
-    });
+    fetch( `${apiUrl}/api/tablatures/${tabId}`, requestOptions )
+        .then( response => response.json() )
+        .then( data => successCallback( data ) );
 }
 
 export const deleteTablature = async ( apiToken, tabId ) => {
     let buildRequest;
     
-    buildRequest    =  fetch( `${apiUrl}/tablatures/${tabId}/delete`, {
-        method: 'GET',
+    buildRequest    =  fetch( `${apiUrl}/api/tablatures/${tabId}`, {
+        method: 'DELETE',
         headers: {
-            'X-AUTH-TOKEN': apiToken
+            'Authorization': 'Bearer ' + apiToken
         }
     });
            

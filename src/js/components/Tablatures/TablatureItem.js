@@ -19,7 +19,7 @@ const TablatureItem = ( {tablature} ) => {
 		<tr>
             <td>{ tablature.artist }</td>
             <td>{ tablature.song }</td>
-            <td>{ tablature.owner }</td>
+            <td>{ tablature.user.info.firstName } { tablature.user.info.lastName }</td>
             <td>
                 <Link to={`/tablatures/${tablature.id}/play`} className="btn btn-primary" >
                 	Play
@@ -30,7 +30,7 @@ const TablatureItem = ( {tablature} ) => {
                   * Only on Tablatures That The Current User is Owner
                   */}
                   
-                { tablature.createdBy == user.id
+                { tablature.user.id == user.userId
                     ? (
                         <Link to={`/tablatures/${tablature.id}/update`} className="btn btn-primary ml-4" >
                             Edit
@@ -39,7 +39,7 @@ const TablatureItem = ( {tablature} ) => {
                     : ''
                 }
                 
-                { tablature.createdBy == user.id
+                { tablature.user.id == user.userId
                     ? (
                         <Link to={`/tablatures/${tablature.id}/delete`} className="btn btn-primary ml-4" onClick={onDelete} >
                             Delete

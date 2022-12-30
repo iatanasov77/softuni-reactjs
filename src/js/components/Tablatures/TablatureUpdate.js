@@ -13,9 +13,12 @@ const TablatureUpdate = () => {
     let { tabId }                   = useParams();
     const [tablature, setTablature] = useState( {
         user_id: user.id,
-        published: false,
+        enabled: false,
         artist: '',
         song: '',
+        tablatureFile: {
+            originalName: ''
+        }
     } );
     
     const [selectedFile, setSelectedFile]   = useState( null );
@@ -28,8 +31,10 @@ const TablatureUpdate = () => {
         
         let formData = new FormData( e.target );
         
-        formData.append( 'tablature_file', selectedFile );
-        formData.append( 'published', tablature.published );
+        formData.append( '_method', 'PUT' );
+        formData.append( 'tablature', selectedFile );
+        formData.set( 'enabled', String( tablature.enabled ).toLowerCase() === "true" );
+        formData.delete( 'tablature_file' );
         
         updateTablatureHandler( tabId, formData )
         e.target.reset();
@@ -50,11 +55,16 @@ const TablatureUpdate = () => {
     };
     
     useEffect( () => {
-        tablatureService.getOne( tabId )
+        tablatureService.getOne( user.apiToken, tabId )
             .then( result => {
+                //console.log( result );
+                setTablature( result );
+                
+                /*
                 if ( result.status == 'success' ) {
                     setTablature( result.resource );
                 }
+                */
             } );
     }, [] );
     
@@ -71,11 +81,11 @@ const TablatureUpdate = () => {
                             <input
                                 type="checkbox"
                                 id="tablature_form_enabled"
-                                name="published"
+                                name="enabled"
                                 className="form-check-input"
                                 
                                 onChange={onChange}
-                                checked={tablature.published}
+                                checked={tablature.enabled}
                             />
                             <label className="form-check-label" htmlFor="tablature_form_enabled">To Be Public</label>
                         </div>
@@ -123,7 +133,7 @@ const TablatureUpdate = () => {
                                     id="tablature_form_tablature_label" 
                                     className="custom-file-label"
                                     htmlFor="tablature_form_tablature"
-                                >{tablature.tablatureName}</label>
+                                >{tablature.tablatureFile.originalName}</label>
                             </div>
                         </div>
                         

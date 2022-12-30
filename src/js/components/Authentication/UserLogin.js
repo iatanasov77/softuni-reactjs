@@ -17,13 +17,14 @@ const UserLogin = () => {
     const onSubmit = ( e ) => {
         e.preventDefault();
         
-        let formData = new FormData( e.target );
+        let formData    = new FormData( e.target );
+        let oFormData   = Object.fromEntries( formData.entries() );
         
         authService.login(
-            formData,
+            oFormData,
             function( response ) {
                 //console.log( response );
-                userMakeLogin( response.resource );
+                userMakeLogin( response.payload );
                 
                 navigate( '/tablatures' );
                 $( '#btnLoginForm' ).dropdown( 'toggle' );

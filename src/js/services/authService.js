@@ -1,37 +1,25 @@
-import { apiUrl, applicationUrl } from './Constants';
+import { apiUrl } from './Constants';
 
 export const login = ( formData, successCallback, errorCallback ) => {
-    $.ajax({
-        url: `${apiUrl}/login`,
-        data: formData,
-        type: "POST",
-        contentType: false,
-        processData: false,
-        success: successCallback,
-        error: errorCallback
-    });
+    const requestOptions = {
+        method:     'POST',
+        headers:    { 'Content-Type': 'application/json' },
+        body:       JSON.stringify( formData )
+    };
+    
+    fetch( `${apiUrl}/api/login_check`, requestOptions )
+        .then( response => response.json() )
+        .then( data => successCallback( data ) );
 }
 
 export const register = ( formData, successCallback, errorCallback ) => {
-    $.ajax({
-        url: `${apiUrl}/register`,
-        data: formData,
-        type: "POST",
-        contentType: false,
-        processData: false,
-        success: successCallback,
-        error: errorCallback
-    });
-}
-
-export const logout = ( formData, successCallback, errorCallback ) => {
-    $.ajax({
-        url: `${apiUrl}/logout`,
-        data: formData,
-        type: "POST",
-        contentType: false,
-        processData: false,
-        success: successCallback,
-        error: errorCallback
-    });
+    const requestOptions = {
+        method:     'POST',
+        headers:    { 'Content-Type': 'application/json' },
+        body:       JSON.stringify( formData )
+    };
+    
+    fetch( `${apiUrl}/api/users/register`, requestOptions )
+        .then( response => response.json() )
+        .then( data => successCallback( data ) );
 }

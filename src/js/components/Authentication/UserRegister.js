@@ -17,6 +17,11 @@ const UserRegister = () => {
         username: '',
         password: '',
         password_repeat: '',
+        
+        email: '',
+        first_name: '',
+        last_name: '',
+        
         tac: false,
     });
     
@@ -71,13 +76,17 @@ const UserRegister = () => {
             return;
         }
         
+        let oFormData   = createRegisterPayload();
         authService.register(
-            formData,
+            oFormData,
             function( response ) {
-                console.log( response );
+                //console.log( response );
                 
-                userMakeLogin( response.resource );
-                navigate( '/tablatures' );
+                if ( response.status == 'ok' ) {
+                    loginUser( {'username': oFormData.username, 'password': oFormData.password} );
+                } else {
+                    navigate( '/' );
+                }
             },
             function() {
                 console.log( 'AJAX ERROR !!!' );
@@ -93,6 +102,33 @@ const UserRegister = () => {
             [e.target.name]: e.target.type == 'checkbox' ? e.target.checked : e.target.value
         }) );
     };
+    
+    function loginUser( credentials )
+    {
+        authService.login(
+            credentials,
+            function( response ) {
+                //console.log( response );
+                userMakeLogin( response.payload );
+                
+                navigate( '/tablatures' );
+            },
+            function() {
+                console.log( 'AJAX ERROR !!!' );
+            }
+        );
+    }
+    
+    function createRegisterPayload()
+    {
+        return {
+            "email": registration.email,
+            "username": registration.username,
+            "password": registration.password,
+            "firstName": registration.first_name,
+            "lastName": registration.last_name
+        };
+    }
     
     return (
         <div className="tablatures-container" style={{marginTop: "110px"}}>
@@ -113,7 +149,6 @@ const UserRegister = () => {
                     
                     <form className="px-4 py-3" id="formRegister" onSubmit={onSubmit} >
                         <div className="form-group">
-                            <label htmlFor="RegisterUsername">Username</label>
                             <input type="text" name="username"
                                 className="form-control"
                                 id="RegisterUsername"
@@ -125,7 +160,6 @@ const UserRegister = () => {
                         </div>
                         
                         <div className="form-group">
-                            <label htmlFor="RegisterPassword">Password</label>
                             <input type="password" name="password"
                                 className="form-control"
                                 id="RegisterPassword"
@@ -137,7 +171,6 @@ const UserRegister = () => {
                         </div>
                         
                         <div className="form-group">
-                            <label htmlFor="RegisterPasswordRepeat">Password Confirm</label>
                             <input type="password" name="password_repeat"
                                 className="form-control"
                                 id="RegisterPasswordRepeat"
@@ -147,6 +180,39 @@ const UserRegister = () => {
                                 onChange={onChange}
                             />
                         </div>
+                        
+                        
+                        <div className="row">&nbsp;</div>
+                        <div className="form-group">
+                            <input type="text" name="email"
+                                className="form-control"
+                                placeholder="Email"
+                                
+                                value={registration.email}
+                                onChange={onChange}
+                            />
+                        </div>
+                        
+                        <div className="form-group">
+                            <input type="password" name="first_name"
+                                className="form-control"
+                                placeholder="First Name"
+                                
+                                value={registration.first_name}
+                                onChange={onChange}
+                            />
+                        </div>
+                        
+                        <div className="form-group">
+                            <input type="password" name="last_name"
+                                className="form-control"
+                                placeholder="Last Name"
+                                
+                                value={registration.last_name}
+                                onChange={onChange}
+                            />
+                        </div>
+                        
                         
                         <div className="row">&nbsp;</div>
                         <div className="form-group">

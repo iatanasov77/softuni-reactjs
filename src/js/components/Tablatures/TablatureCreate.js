@@ -10,7 +10,7 @@ const TablatureCreate = () => {
     
     const [tablature, setTablature] 		= useState({
         user_id: user.id,
-    	published: false,
+    	enabled: false,
     	artist: '',
     	song: '',
     });
@@ -24,8 +24,9 @@ const TablatureCreate = () => {
 		e.preventDefault();
 		
 		let formData = new FormData( e.target );
-		formData.append( 'tablature_file', selectedFile );
-		formData.append( 'published', tablature.published );
+		formData.append( 'tablature', selectedFile );
+		formData.append( 'enabled', tablature.enabled );
+		formData.delete( 'tablature_file' );
 		
 		addTablatureHandler( formData );
 		e.target.reset();
@@ -73,11 +74,11 @@ const TablatureCreate = () => {
                         <input
                             type="checkbox"
                             id="tablature_form_enabled"
-                            name="published"
+                            name="enabled"
                             className="form-check-input"
                             
                             onChange={onChange}
-                            checked={tablature.published}
+                            checked={tablature.enabled}
                         />
                         <label className="form-check-label" htmlFor="tablature_form_enabled">To Be Public</label>
                     </div>
