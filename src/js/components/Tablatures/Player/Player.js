@@ -7,7 +7,7 @@ import PlayerControls from './PlayerControls';
 const Player = () => {
 	let { tabId }	= useParams();
 	
-	const remoteUrl    = tablatureService.serviceUrl();
+	const remoteUrl    = tablatureService.tabUrl();
 	const appUrl       = tablatureService.appUrl();
 	
     const alphatabApiRef    = useRef( null );

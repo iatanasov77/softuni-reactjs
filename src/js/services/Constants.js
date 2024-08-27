@@ -5,7 +5,8 @@ export const apiUrl         = 'http://api.wgp.lh/api';
 //export const apiUrl         = 'http://softuni-api.vankosoft.org';
 
 /**
- *  Application URL
+ *  Application URLs
  */
-export const applicationUrl = 'http://reactjs.lh';
+export const tablaturesUrl  = 'http://wgp.lh';
+export const applicationUrl = 'http://reactjs.frontend.lh';
 

@@ -7,7 +7,7 @@ export const login = ( formData, successCallback, errorCallback ) => {
         body:       JSON.stringify( formData )
     };
     
-    fetch( `${apiUrl}/api/login_check`, requestOptions )
+    fetch( `${apiUrl}/login_check`, requestOptions )
         .then( response => response.json() )
         .then( data => successCallback( data ) );
 }
@@ -19,7 +19,7 @@ export const register = ( formData, successCallback, errorCallback ) => {
         body:       JSON.stringify( formData )
     };
     
-    fetch( `${apiUrl}/api/users/register`, requestOptions )
+    fetch( `${apiUrl}/users/register`, requestOptions )
         .then( response => response.json() )
         .then( data => successCallback( data ) );
 }

@@ -1,7 +1,11 @@
-import { apiUrl, applicationUrl } from './Constants';
+import { apiUrl, tablaturesUrl, applicationUrl } from './Constants';
 
 export const appUrl = () => {
     return applicationUrl;
+}
+
+export const tabUrl = () => {
+    return tablaturesUrl;
 }
 
 export const serviceUrl = () => {
@@ -14,14 +18,14 @@ export const getAll = () => {
 };
 
 export const getPublished = () => {
-    return fetch( `${apiUrl}/api/latest-tablatures` )
+    return fetch( `${apiUrl}/latest-tablatures` )
             .then( res => res.json() );
 };
 
 export const getMyTablatures = async ( apiToken ) => {
     let buildRequest;
     
-    buildRequest    =  fetch( `${apiUrl}/api/my-tablatures`, {
+    buildRequest    =  fetch( `${apiUrl}/my-tablatures`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + apiToken
@@ -37,7 +41,7 @@ export const getMyTablatures = async ( apiToken ) => {
 export const getMyFavorites = async ( apiToken ) => {
     let buildRequest;
     
-    buildRequest    =  fetch( `${apiUrl}/api/my-favorites`, {
+    buildRequest    =  fetch( `${apiUrl}/my-favorites`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + apiToken
@@ -58,7 +62,7 @@ export const getOne = ( apiToken, tabId ) => {
         }
     };
     
-	return fetch( `${apiUrl}/api/tablatures/${tabId}`, requestOptions )
+	return fetch( `${apiUrl}/tablatures/${tabId}`, requestOptions )
 			.then( res => res.json() );
 };
 
@@ -71,7 +75,7 @@ export const createTablature = ( apiToken, formData, successCallback, errorCallb
         body: formData
     };
     
-    fetch( `${apiUrl}/api/tablatures/new`, requestOptions )
+    fetch( `${apiUrl}/tablatures/new`, requestOptions )
         .then( response => response.json() )
         .then( data => successCallback( data ) );
 }
@@ -85,7 +89,7 @@ export const updateTablature = ( apiToken, tabId, formData, successCallback, err
         body: formData
     };
     
-    fetch( `${apiUrl}/api/tablatures/${tabId}`, requestOptions )
+    fetch( `${apiUrl}/tablatures/${tabId}`, requestOptions )
         .then( response => response.json() )
         .then( data => successCallback( data ) );
 }
@@ -93,7 +97,7 @@ export const updateTablature = ( apiToken, tabId, formData, successCallback, err
 export const deleteTablature = async ( apiToken, tabId ) => {
     let buildRequest;
     
-    buildRequest    =  fetch( `${apiUrl}/api/tablatures/${tabId}`, {
+    buildRequest    =  fetch( `${apiUrl}/tablatures/${tabId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + apiToken
